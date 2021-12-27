@@ -23,8 +23,9 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'username' => $this->faker->word() . '_' . time(),
+            'username' => $this->faker->userName(),
             'password' => 'password',
+            'role' => 'GUEST',
         ];
     }
 }
