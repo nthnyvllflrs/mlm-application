@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Representative;
+use App\Observers\RepresentativeObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
+        /**
+         * Model abservers
+         */
+        Representative::observe(RepresentativeObserver::class);
     }
 }

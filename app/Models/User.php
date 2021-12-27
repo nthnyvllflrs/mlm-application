@@ -31,6 +31,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'role',
+
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -39,7 +42,21 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'created_at' => 'datetime:m-d-Y H:i',
+        'updated_at' => 'datetime:m-d-Y H:i',
     ];
+
+    /**
+     * Model relationships
+     */
+
+    /**
+     * Get owned representative
+     *
+     * @return relation
+     */
+    public function representative()
+    {
+        return $this->hasOne(Representative::class);
+    }
 }
