@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\GenealogyController;
 use App\Http\Controllers\RepresentativeController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::apiResource('representatives', RepresentativeController::class);
+    Route::apiResource('genealogies', GenealogyController::class);
 });

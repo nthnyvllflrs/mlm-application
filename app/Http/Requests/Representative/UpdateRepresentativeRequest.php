@@ -24,6 +24,8 @@ class UpdateRepresentativeRequest extends FormRequest
          */
         if (request()->user()->can('update', $representativeToUpdate))
             return true;
+
+        return false;
     }
 
     /**

@@ -3,10 +3,12 @@
 namespace App\Observers;
 
 use App\Models\Representative;
-use Illuminate\Support\Str;
+use App\Traits\MiscFunction;
 
 class RepresentativeObserver
 {
+    use MiscFunction;
+
     /**
      * Handle the Representative "creating" event.
      *
@@ -18,7 +20,7 @@ class RepresentativeObserver
         /**
          * Generate unique code for new representative
          */
-        $representative->code = $this->generateRandomUniqueCode();
+        $representative->code = $this->generateRandomUniqueCode(Representative::class, 6);
     }
 
     /**
@@ -74,34 +76,5 @@ class RepresentativeObserver
     public function forceDeleted(Representative $representative)
     {
         //
-    }
-
-    /**
-     * Generate random unique code for representative
-     *
-     * @return string
-     */
-    private function generateRandomUniqueCode() {
-        /**
-         * Generate random code
-         */
-        $randomUniqueCode = strtoupper(Str::random(6));
-
-        /**
-         * Check if code already exists
-         */
-        $codeAlreadyExists = Representative::whereCode($randomUniqueCode)->exists();
-
-        /**
-         * If code already exists, call this function again
-         * to generate new code
-         */
-        if ($codeAlreadyExists)
-            return $this->generateRandomUniqueCode();
-
-        /**
-         * Return random unique code
-         */
-        return $randomUniqueCode;
     }
 }

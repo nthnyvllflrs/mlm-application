@@ -19,7 +19,7 @@ class RepresentativeTest extends TestCase
      *
      * @return null
      */
-    public function testAdministratorListRepresentative()
+    public function testAdministratorListRepresentatives()
     {
         /**
          * Create an administrator
@@ -29,9 +29,13 @@ class RepresentativeTest extends TestCase
         /**
          * Create representatives
          */
-        User::factory()->state(['role' => 'REPRESENTATIVE'])->create()->each(function ($user) {
-            Representative::factory()->create(['user_id' => $user->id]);
-        });
+        User::factory()
+            ->count(1)
+            ->state(['role' => 'REPRESENTATIVE'])
+            ->create()
+            ->each(function ($user) {
+                Representative::factory()->create(['user_id' => $user->id]);
+            });
 
         /**
          * Authenticate administrator
@@ -217,9 +221,9 @@ class RepresentativeTest extends TestCase
          * Assert database
          */
 
-         /**
-          * Check if representative was deleted
-          */
+        /**
+         * Check if representative was deleted
+         */
         $this->assertDatabaseMissing('users', [
             'id' => $user->id
         ]);

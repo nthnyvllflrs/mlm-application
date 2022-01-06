@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Genealogy;
 use App\Models\Representative;
+use App\Observers\GenealogyObserver;
 use App\Observers\RepresentativeObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
          * Model abservers
          */
         Representative::observe(RepresentativeObserver::class);
+        Genealogy::observe(GenealogyObserver::class);
     }
 }

@@ -54,4 +54,14 @@ class Representative extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get owned genealogies
+     *
+     * @return relation
+     */
+    public function genealogies()
+    {
+        return $this->hasMany(Genealogy::class);
+    }
 }

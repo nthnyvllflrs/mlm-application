@@ -19,6 +19,8 @@ class StoreRepresentativeRequest extends FormRequest
          */
         if (request()->user()->can('create', Representative::class))
             return true;
+
+        return false;
     }
 
     /**
