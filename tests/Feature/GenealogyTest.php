@@ -105,7 +105,7 @@ class GenealogyTest extends TestCase
          */
         $genealogyData = [
             'representative_id' => $representative->id,
-            'type' => 'BRONZE',
+            'type' => 'STANDARD',
             'referral_id' => $genesisGenealogyId,
             'reference_id' => $genesisGenealogyId,
             'reference_position' => 'LEFT'

@@ -31,7 +31,7 @@ class StoreGenealogyRequest extends FormRequest
     {
         return [
             'representative_id' => 'required|exists:representatives,id',
-            'type' => 'required|in:BRONZE,SILVER,GOLD,PLATINUM',
+            'type' => 'required|in:STANDARD',
             'referral_id' => 'required|exists:genealogies,id',
             'reference_id' => 'required|exists:genealogies,id',
             'reference_position' => 'required|in:LEFT,RIGHT',

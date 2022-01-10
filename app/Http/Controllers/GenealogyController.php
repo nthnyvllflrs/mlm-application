@@ -58,6 +58,9 @@ class GenealogyController extends Controller
 
         /**
          * Note: Insert ways to earn here...
+         *      1. Direct Referral Bonus
+         *      2. Match Bonus
+         *      3. Indirect Referral Bonus
          */
 
         /**

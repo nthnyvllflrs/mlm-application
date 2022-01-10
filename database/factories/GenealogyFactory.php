@@ -22,7 +22,7 @@ class GenealogyFactory extends Factory
     public function definition()
     {
         return [
-            'type' => $this->faker->randomElement(['BRONZE', 'SILVER', 'GOLD', 'PLATINUM']),
+            'type' => $this->faker->randomElement(['STANDARD']),
             'reference_position' => $this->faker->randomElement(['LEFT', 'RIGHT']),
         ];
     }
