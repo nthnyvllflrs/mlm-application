@@ -99,4 +99,13 @@ class Genealogy extends Model
     public function referencedBy() {
         return $this->hasMany(Genealogy::class, 'reference_id');
     }
+
+    /**
+     * Get owned genealogy wallet
+     *
+     * @return relation
+     */
+    public function genealogyWallet() {
+        return $this->hasOne(GenealogyWallet::class);
+    }
 }

@@ -37,7 +37,13 @@ class GenealogyObserver
      */
     public function created(Genealogy $genealogy)
     {
-        //
+        /**
+         * Create a new genealogy wallet for newly created genealogy
+         */
+        $genealogy->genealogyWallet()->create([
+            'balance' => 0,
+            'accumulated_balance' => 0,
+        ]);
     }
 
     /**

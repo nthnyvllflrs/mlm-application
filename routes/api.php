@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GenealogyController;
+use App\Http\Controllers\GenealogyWalletController;
 use App\Http\Controllers\RepresentativeController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::apiResource('representatives', RepresentativeController::class);
     Route::apiResource('genealogies', GenealogyController::class);
+    Route::apiResource('genealogyWallets', GenealogyWalletController::class);
 });

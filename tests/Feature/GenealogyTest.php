@@ -71,6 +71,8 @@ class GenealogyTest extends TestCase
                     'id', 'code', 'type',
                     'reference_position',
                     'referral', 'reference',
+                    'left_available_match_points',
+                    'right_available_match_points',
                 ]],
                 'links', 'meta'
             ]);
@@ -127,6 +129,8 @@ class GenealogyTest extends TestCase
                     'id', 'code', 'type',
                     'reference_position',
                     'referral', 'reference',
+                    'left_available_match_points',
+                    'right_available_match_points',
                 ],
             ]);
     }
@@ -189,6 +193,8 @@ class GenealogyTest extends TestCase
                     'id', 'code', 'type',
                     'reference_position',
                     'referral', 'reference',
+                    'left_available_match_points',
+                    'right_available_match_points',
                 ],
             ]);
     }
@@ -314,7 +320,7 @@ class GenealogyTest extends TestCase
      *
      * @return int
      */
-    private function createGenesisGenealogy()
+    public static function createGenesisGenealogy()
     {
         /**
          * Create the genesis genealogy
