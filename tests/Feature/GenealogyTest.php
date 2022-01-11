@@ -330,7 +330,7 @@ class GenealogyTest extends TestCase
                 'representative_id' => $representative->id,
                 'referral_id' => null,
                 'reference_id' => null,
-                'reference_position' => 'ROOT',
+                'reference_position' => 'HEAD',
                 'type' => 'GENESIS'
             ]);
 

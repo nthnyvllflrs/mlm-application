@@ -21,6 +21,8 @@ class CreateGenealogiesTable extends Migration
             $table->unsignedBigInteger('referral_id')->nullable(); // Nullable for the first genealogy
             $table->unsignedBigInteger('reference_id')->nullable(); // Nullable for the first genealogy
             $table->string('reference_position');
+            $table->integer('left_available_match_points');
+            $table->integer('right_available_match_points');
             $table->timestamps();
 
             // Foreign keys

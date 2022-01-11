@@ -4,7 +4,7 @@ namespace App\Traits;
 
 use Illuminate\Support\Str;
 
-trait MiscFunction
+trait MiscFuncTrait
 {
     /**
      * Generate random unique code for representative

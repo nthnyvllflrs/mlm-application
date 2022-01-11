@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\GenealogyTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,9 @@ class Genealogy extends Model
         'referral_id',
         'reference_id',
         'reference_position',
+
+        'left_available_match_points',
+        'right_available_match_points',
     ];
 
     /**

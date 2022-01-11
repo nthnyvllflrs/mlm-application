@@ -24,6 +24,8 @@ class GenealogyFactory extends Factory
         return [
             'type' => $this->faker->randomElement(['STANDARD']),
             'reference_position' => $this->faker->randomElement(['LEFT', 'RIGHT']),
+            'left_available_match_points' => 0,
+            'right_available_match_points' => 0,
         ];
     }
 }

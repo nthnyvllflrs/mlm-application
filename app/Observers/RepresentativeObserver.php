@@ -3,11 +3,11 @@
 namespace App\Observers;
 
 use App\Models\Representative;
-use App\Traits\MiscFunction;
+use App\Traits\MiscFuncTrait;
 
 class RepresentativeObserver
 {
-    use MiscFunction;
+    use MiscFuncTrait;
 
     /**
      * Handle the Representative "creating" event.

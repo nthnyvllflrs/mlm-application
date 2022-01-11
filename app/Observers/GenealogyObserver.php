@@ -3,11 +3,11 @@
 namespace App\Observers;
 
 use App\Models\Genealogy;
-use App\Traits\MiscFunction;
+use App\Traits\MiscFuncTrait;
 
 class GenealogyObserver
 {
-    use MiscFunction;
+    use MiscFuncTrait;
 
     /**
      * Handle the Genealogy "creating" event.
@@ -21,6 +21,12 @@ class GenealogyObserver
          * Generate unique code for new genealogy
          */
         $genealogy->code = $this->generateRandomUniqueCode(Genealogy::class, 6);
+
+        /**
+         * Set default values
+         */
+        $genealogy->left_available_match_points = 0;
+        $genealogy->right_available_match_points = 0;
     }
 
     /**
