@@ -63,7 +63,7 @@ class GenealogyTest extends TestCase
         /**
          * Test GenealogyTrait::getGenealogyAncestors()
          */
-        $ancestors = $this->getGenealogyAncestors($genealogy, 10);
+        $ancestors = Genealogy::getGenealogyAncestors($genealogy, 10);
 
         /**
          * Assert that the ancestors array has the correct number of elements

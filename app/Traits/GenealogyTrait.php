@@ -13,7 +13,7 @@ trait GenealogyTrait
      *
      * @return array
      */
-    private function getGenealogyAncestors(Genealogy $genealogy, int $numberOfAncestors, array $ancestors = [])
+    public static function getGenealogyAncestors(Genealogy $genealogy, int $numberOfAncestors, array $ancestors = [])
     {
         /**
          * Get genealogy reference genealogy
@@ -50,7 +50,7 @@ trait GenealogyTrait
         /**
          * Call the function again
          */
-        return $this->getGenealogyAncestors($referenceGenealogy, $numberOfAncestors, $ancestors);
+        return GenealogyTrait::getGenealogyAncestors($referenceGenealogy, $numberOfAncestors, $ancestors);
     }
 
     /**
@@ -58,9 +58,23 @@ trait GenealogyTrait
      *
      * @return float
      */
-    private function awardDirectReferralBonusToReferrer(Genealogy $referrer) {
+    public static function awardDirectReferralBonusToReferrerGenealogy(Genealogy $genealogy) {
+
+        // Get referrer genealogy
+        $referrerGenealogy = $genealogy->referral;
+
+        // Get referrer genealogy wallet
+        $referrerGenealogyWallet = $referrerGenealogy->genealogyWallet;
+
+        // Direct Referral Bonus Reward
+        $directReferralBonus = 300;
+
+        // Add direct referral bonus to genealogy wallet
+        $referrerGenealogyWallet->increment('balance', $directReferralBonus);
+        $referrerGenealogyWallet->increment('accumulated_balance', $directReferralBonus);
+
         // return total award
-        return 0.00;
+        return $directReferralBonus;
     }
 
     /**
@@ -68,7 +82,7 @@ trait GenealogyTrait
      *
      * @return float
      */
-    private function awardIndirectReferralBonusToAncestor(Genealogy $ancestor) {
+    public static function awardIndirectReferralBonusToAncestors(Genealogy $ancestor) {
         // return total award
         return 0.00;
     }
@@ -78,7 +92,7 @@ trait GenealogyTrait
      *
      * @return float
      */
-    private function awardMatchBonusToGeneaogy(Genealogy $genealogy) {
+    public static function awardMatchBonusToGenealogy(Genealogy $genealogy) {
         // return total award
         return 0.00;
     }
@@ -88,7 +102,7 @@ trait GenealogyTrait
      *
      * @return bool
      */
-    private function checkForMatchBonus(Genealogy $genealogy) {
+    public static function checkForMatchBonus(Genealogy $genealogy) {
         // return false if no match bonus
         return false;
     }

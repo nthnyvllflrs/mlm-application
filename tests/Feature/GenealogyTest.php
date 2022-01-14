@@ -94,7 +94,7 @@ class GenealogyTest extends TestCase
         /**
          * Create genesis genealogy
          */
-        $genesisGenealogyId = $this->createGenesisGenealogy();
+        $genesis = $this->createGenesisGenealogy();
 
         /**
          * Create representative
@@ -108,8 +108,8 @@ class GenealogyTest extends TestCase
         $genealogyData = [
             'representative_id' => $representative->id,
             'type' => 'STANDARD',
-            'referral_id' => $genesisGenealogyId,
-            'reference_id' => $genesisGenealogyId,
+            'referral_id' => $genesis->id,
+            'reference_id' => $genesis->id,
             'reference_position' => 'LEFT'
         ];
 
@@ -133,6 +133,19 @@ class GenealogyTest extends TestCase
                     'right_available_match_points',
                 ],
             ]);
+
+        /**
+         * Check if referral reward bonus was awarded
+         */
+        $genesisGenealogyWallet = $genesis->genealogyWallet;
+
+        /**
+         * Check genesis genealogy wallet values
+         * 300, is the default value, to check go to
+         * GenealogyTrait::awardDirectReferralBonusToReferrerGenealogy()
+         */
+        $this->assertEquals(300, $genesisGenealogyWallet->balance);
+        $this->assertEquals(300, $genesisGenealogyWallet->accumulated_balance);
     }
 
     /**
@@ -318,7 +331,7 @@ class GenealogyTest extends TestCase
     /**
      * Create the genesis genealogy
      *
-     * @return int
+     * @return Genealogy
      */
     public static function createGenesisGenealogy()
     {
@@ -343,6 +356,6 @@ class GenealogyTest extends TestCase
         /**
          * Return the genesis genealogy id
          */
-        return $genesis->id;
+        return $genesis;
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Genealogy extends Model
 {
-    use HasFactory;
+    use HasFactory, GenealogyTrait;
 
     /**
      * Attributes that are mass assignable.

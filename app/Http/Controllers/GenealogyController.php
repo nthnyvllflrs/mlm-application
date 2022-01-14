@@ -63,6 +63,9 @@ class GenealogyController extends Controller
          *      3. Indirect Referral Bonus
          */
 
+        // Award Direct Referral Bonus To Referrer Genealogy
+        Genealogy::awardDirectReferralBonusToReferrerGenealogy($genealogy);
+
         /**
          * Return a resource of genealogy
          */
