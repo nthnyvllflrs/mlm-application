@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Genealogy\StoreGenealogyRequest;
 use App\Http\Resources\GenealogyResource;
 use App\Models\Genealogy;
+use App\Traits\GenealogyTrait;
 use Illuminate\Http\Request;
 
 class GenealogyController extends Controller
 {
+    use GenealogyTrait;
+
     /**
      * Create the controller instance.
      *
@@ -56,15 +59,8 @@ class GenealogyController extends Controller
         $genealogy = Genealogy::create($request
             ->validated());
 
-        /**
-         * Note: Insert ways to earn here...
-         *      1. Direct Referral Bonus
-         *      2. Match Bonus
-         *      3. Indirect Referral Bonus
-         */
-
-        // Award Direct Referral Bonus To Referrer Genealogy
-        Genealogy::awardDirectReferralBonusToReferrerGenealogy($genealogy);
+        // Call onNewGenealogyCreated from GenealogyTrait trait
+        $this->onNewGenealogyCreated($genealogy);
 
         /**
          * Return a resource of genealogy

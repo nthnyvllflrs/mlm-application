@@ -13,7 +13,7 @@ trait GenealogyTrait
      *
      * @return array
      */
-    public static function getGenealogyAncestors(Genealogy $genealogy, int $numberOfAncestors, array $ancestors = [])
+    public function getGenealogyAncestors(Genealogy $genealogy, int $numberOfAncestors, array $ancestors = [])
     {
         /**
          * Get genealogy reference genealogy
@@ -50,7 +50,7 @@ trait GenealogyTrait
         /**
          * Call the function again
          */
-        return GenealogyTrait::getGenealogyAncestors($referenceGenealogy, $numberOfAncestors, $ancestors);
+        return $this->getGenealogyAncestors($referenceGenealogy, $numberOfAncestors, $ancestors);
     }
 
     /**
@@ -58,7 +58,8 @@ trait GenealogyTrait
      *
      * @return float
      */
-    public static function awardDirectReferralBonusToReferrerGenealogy(Genealogy $genealogy) {
+    public function awardDirectReferralBonusToReferrerGenealogy(Genealogy $genealogy)
+    {
 
         // Get referrer genealogy
         $referrerGenealogy = $genealogy->referral;
@@ -82,9 +83,21 @@ trait GenealogyTrait
      *
      * @return float
      */
-    public static function awardIndirectReferralBonusToAncestors(Genealogy $ancestor) {
+    public function awardIndirectReferralBonusToAncestor(Genealogy $ancestor)
+    {
+
+        // Get  ancestor wallet
+        $ancestorWallet = $ancestor->genealogyWallet;
+
+        // Indirect Referral Bonus Reward
+        $indirectReferralBonus = 3;
+
+        // Add indirect referral bonus to ancestor wallet
+        $ancestorWallet->increment('balance', $indirectReferralBonus);
+        $ancestorWallet->increment('accumulated_balance', $indirectReferralBonus);
+
         // return total award
-        return 0.00;
+        return $indirectReferralBonus;
     }
 
     /**
@@ -92,9 +105,20 @@ trait GenealogyTrait
      *
      * @return float
      */
-    public static function awardMatchBonusToGenealogy(Genealogy $genealogy) {
+    public function awardMatchBonusToGenealogy(Genealogy $genealogy, int $matchPoints)
+    {
+        // Get ancestor genealogy wallet
+        $genealogyWallet = $genealogy->genealogyWallet;
+
+        // Match Bonus Reward
+        $matchBonus = 600 * $matchPoints;
+
+        // Add direct referral bonus to genealogy wallet
+        $genealogyWallet->increment('balance', $matchBonus);
+        $genealogyWallet->increment('accumulated_balance', $matchBonus);
+
         // return total award
-        return 0.00;
+        return $matchBonus;
     }
 
     /**
@@ -102,8 +126,39 @@ trait GenealogyTrait
      *
      * @return bool
      */
-    public static function checkForMatchBonus(Genealogy $genealogy) {
-        // return false if no match bonus
-        return false;
+    public function checkForMatchBonus(Genealogy $genealogy)
+    {
+        // return 0 if no match bonus
+        return 0;
+    }
+
+    /**
+     * On new genealogy created
+     * Todo list:
+     *      Direct Referral Bonus - Referral Genealogy
+     *      Indirect Referral Bonus - Ancestors
+     *      Match Bonus - Ancestors
+     *
+     * @return void
+     */
+    public function onNewGenealogyCreated(Genealogy $genealogy)
+    {
+        // Award direct referral bonus to referrer genealogy
+        $this->awardDirectReferralBonusToReferrerGenealogy($genealogy);
+
+        // Get ancestors of new genealogy, up to 10 genealogies
+        $ancestors = $this->getGenealogyAncestors($genealogy, 10);
+
+        // Loop through each ancestor
+        foreach ($ancestors as $index => $ancestor) {
+            // Indirect Referral
+            $this->awardIndirectReferralBonusToAncestor($ancestor);
+
+            // Check for match bonus
+            $matchPoints = $this->checkForMatchBonus($ancestor);
+
+            // Award match bonus to genealogy
+            $this->awardMatchBonusToGenealogy($ancestor, $matchPoints);
+        }
     }
 }

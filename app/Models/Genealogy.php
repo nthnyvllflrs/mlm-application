@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Traits\GenealogyTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Genealogy extends Model
 {
-    use HasFactory, GenealogyTrait;
+    use HasFactory;
 
     /**
      * Attributes that are mass assignable.

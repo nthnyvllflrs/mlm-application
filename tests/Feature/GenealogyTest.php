@@ -141,11 +141,14 @@ class GenealogyTest extends TestCase
 
         /**
          * Check genesis genealogy wallet values
-         * 300, is the default value, to check go to
-         * GenealogyTrait::awardDirectReferralBonusToReferrerGenealogy()
+         * 300, is the default value for direct referral, to check go to
+         * GenealogyTrait@awardDirectReferralBonusToReferrerGenealogy()
+         * plus
+         * 3, is the default value for indirect referral, to check go to
+         * GenealogyTrait@awardIndirectReferralBonusToReferrerGenealogy()
          */
-        $this->assertEquals(300, $genesisGenealogyWallet->balance);
-        $this->assertEquals(300, $genesisGenealogyWallet->accumulated_balance);
+        $this->assertEquals(303, $genesisGenealogyWallet->balance);
+        $this->assertEquals(303, $genesisGenealogyWallet->accumulated_balance);
     }
 
     /**
